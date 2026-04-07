@@ -1,0 +1,5 @@
+package browser39:tools;
+
+world browser39 {
+    export html-to-markdown: func(html: string, selector: string) -> string;
+}

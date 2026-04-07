@@ -1,0 +1,35 @@
+version: "1.0"
+namespace: app
+
+entries:
+  - name: processes
+    kind: process.host
+    meta:
+      comment: Process execution host
+    host:
+      max_processes: 100
+      workers: 4
+    lifecycle:
+      auto_start: true
+
+  - name: terminal
+    kind: terminal.host
+    meta:
+      comment: Terminal host for CLI
+    hide_logs: false
+    lifecycle:
+      auto_start: true
+
+  - name: runner
+    kind: process.lua
+    meta:
+      comment: Fetch and convert page to markdown
+      command:
+        name: run
+        short: Fetch page and convert to markdown
+    source: file://run_browser39.lua
+    method: main
+    modules:
+      - io
+      - funcs
+      - http_client

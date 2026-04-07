@@ -1,0 +1,24 @@
+version: "1.0"
+namespace: app.browser39
+
+entries:
+  - name: assets
+    kind: fs.directory
+    meta:
+      comment: Filesystem with browser39 WASM module
+    directory: ./src/browser39
+
+  - name: html_to_markdown
+    kind: function.wasm
+    meta:
+      comment: Convert raw HTML to Markdown using browser39/scraper engine
+    fs: app.browser39:assets
+    path: /browser39_core.wasm
+    hash: sha256:01e8883c35f33e57576e86aa558ba748cac778058d2cdb10ce4916493a19a6ae
+    method: html-to-markdown
+    wit: |
+      html-to-markdown: func(html: string, selector: string) -> string;
+    imports:
+      - wasi1
+    pool:
+      type: inline
